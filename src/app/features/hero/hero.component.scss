@@ -1,0 +1,124 @@
+.hero {
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  padding: 40px 5%;
+  background-color: #fff;
+  overflow: hidden;
+
+  .hero-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 60px;
+  }
+
+  .hero-content {
+    flex: 1;
+    
+    .hero-title {
+      font-size: 3.5rem;
+      font-weight: 900;
+      line-height: 1.1;
+      color: #000;
+      margin-bottom: 25px;
+
+      .highlight {
+        color: #b8924e; // Dorado DACB
+      }
+    }
+
+    .hero-description {
+      font-size: 1.1rem;
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 35px;
+      max-width: 500px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 15px;
+
+      a {
+        text-decoration: none;
+        padding: 15px 30px;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: 0.3s;
+      }
+
+      .btn-primary {
+        background-color: #000;
+        color: #fff;
+        &:hover { background-color: #333; }
+      }
+
+      .btn-secondary {
+        border: 2px solid #000;
+        color: #000;
+        &:hover { background-color: #f4f4f4; }
+      }
+    }
+  }
+
+  .hero-image-wrapper {
+    flex: 1;
+    position: relative;
+    display: flex;
+    justify-content: center;
+
+    .hero-image {
+      width: 100%;
+      max-width: 500px;
+      height: auto;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      z-index: 2;
+    }
+
+    .image-bg-accent {
+      position: absolute;
+      top: 10%;
+      right: -5%;
+      width: 80%;
+      height: 80%;
+      background-color: #f9f5eb; // Un beige muy suave
+      border-radius: 20px;
+      z-index: 1;
+    }
+  }
+}
+
+/* RESPONSIVIDAD PARA CELULARES */
+@media (max-width: 992px) {
+  .hero {
+    padding: 100px 5% 40px; // Espacio extra arriba por el Navbar
+    
+    .hero-container {
+      flex-direction: column-reverse; // Imagen arriba, texto abajo en móviles
+      text-align: center;
+      gap: 40px;
+    }
+
+    .hero-content {
+      .hero-title {
+        font-size: 2.5rem;
+      }
+      .hero-description {
+        margin: 0 auto 30px;
+      }
+      .hero-actions {
+        justify-content: center;
+        flex-direction: column;
+      }
+    }
+
+    .hero-image-wrapper {
+      .hero-image {
+        max-width: 100%;
+      }
+    }
+  }
+}

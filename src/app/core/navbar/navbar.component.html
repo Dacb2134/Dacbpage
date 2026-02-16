@@ -1,0 +1,18 @@
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="logo">
+      DACB<span>.</span>
+    </div>
+
+    <button class="mobile-menu-btn" (click)="toggleMenu()">
+      <span [class.open]="isMenuOpen"></span>
+    </button>
+
+    <ul class="nav-links" [class.active]="isMenuOpen">
+      <li><a href="#" (click)="closeMenu()">Colecciones</a></li>
+      <li><a href="#" (click)="closeMenu()">Materiales</a></li>
+      <li><a href="#" (click)="closeMenu()">Historia</a></li>
+      <li><a href="#" class="btn-cta" (click)="closeMenu()">Comprar Ahora</a></li>
+    </ul>
+  </div>
+</nav>
