@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
-import { HeroComponent } from './features/hero/hero.component';
-import { ProductListComponent } from './features/product-list/product-list.component';
+import { HomeComponent } from './features/home/home.component'; 
 
 export const routes: Routes = [
   { 
@@ -10,6 +9,8 @@ export const routes: Routes = [
   },
   { 
     path: 'inicio', 
-    component: HeroComponent 
-  }
+    component: HomeComponent 
+  },
+  // (Opcional) Si quisieras una página solo para ver productos aparte:
+  // { path: 'catalogo', component: ProductListComponent } 
 ];

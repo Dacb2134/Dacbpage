@@ -1,9 +1,11 @@
-/* Identidad DACB */
+
 :root {
-  --brand-black: #000000;
-  --brand-gold: #b8924e; /* Color cuero/premium */
-  --brand-light: #f4f4f4;
+  --brand-black: #0a0a0a;     /* Un negro más profundo y rico */
+  --brand-gold: #b8924e;      /* Tu dorado original */
+  --brand-gray: #1f1f1f;      /* Para fondos secundarios */
+  --brand-white: #ededed;     /* Blanco suave para lectura */
 }
+
 
 * {
   margin: 0;
@@ -11,27 +13,15 @@
   box-sizing: border-box;
 }
 
-body {
-  font-family: 'Segoe UI', Roboto, sans-serif;
-  background-color: white;
-  color: var(--brand-black);
-}
 html, body {
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden; 
   width: 100%;
+  overflow-x: hidden; 
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--brand-black); 
+  color: var(--brand-white);
 }
 
-@media (max-width: 768px) {
-  .contenedor-principal {
-    flex-direction: column; 
-    text-align: center;
-    padding: 20px;
-  }
-  
-  .imagen-billetera {
-    width: 100%; 
-    height: auto;
-  }
+
+h1, h2, h3 {
+  letter-spacing: -0.05em; 
 }

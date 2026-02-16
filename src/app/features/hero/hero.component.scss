@@ -1,124 +1,120 @@
-.hero {
-  min-height: 90vh;
+.hero-section {
+  min-height: 90vh; 
   display: flex;
   align-items: center;
-  padding: 40px 5%;
-  background-color: #fff;
-  overflow: hidden;
-
-  .hero-container {
+  justify-content: center;
+  padding: 100px 20px 40px;
+  
+  .container {
     max-width: 1200px;
+    width: 100%;
     margin: 0 auto;
     display: flex;
     align-items: center;
-    gap: 60px;
-  }
-
-  .hero-content {
-    flex: 1;
-    
-    .hero-title {
-      font-size: 3.5rem;
-      font-weight: 900;
-      line-height: 1.1;
-      color: #000;
-      margin-bottom: 25px;
-
-      .highlight {
-        color: #b8924e; // Dorado DACB
-      }
-    }
-
-    .hero-description {
-      font-size: 1.1rem;
-      color: #555;
-      line-height: 1.6;
-      margin-bottom: 35px;
-      max-width: 500px;
-    }
-
-    .hero-actions {
-      display: flex;
-      gap: 15px;
-
-      a {
-        text-decoration: none;
-        padding: 15px 30px;
-        border-radius: 8px;
-        font-weight: 600;
-        transition: 0.3s;
-      }
-
-      .btn-primary {
-        background-color: #000;
-        color: #fff;
-        &:hover { background-color: #333; }
-      }
-
-      .btn-secondary {
-        border: 2px solid #000;
-        color: #000;
-        &:hover { background-color: #f4f4f4; }
-      }
-    }
-  }
-
-  .hero-image-wrapper {
-    flex: 1;
-    position: relative;
-    display: flex;
-    justify-content: center;
-
-    .hero-image {
-      width: 100%;
-      max-width: 500px;
-      height: auto;
-      border-radius: 20px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-      z-index: 2;
-    }
-
-    .image-bg-accent {
-      position: absolute;
-      top: 10%;
-      right: -5%;
-      width: 80%;
-      height: 80%;
-      background-color: #f9f5eb; // Un beige muy suave
-      border-radius: 20px;
-      z-index: 1;
-    }
+    justify-content: space-between;
+    gap: 40px; 
   }
 }
 
-/* RESPONSIVIDAD PARA CELULARES */
-@media (max-width: 992px) {
-  .hero {
-    padding: 100px 5% 40px; // Espacio extra arriba por el Navbar
+/* TEXTO */
+.hero-content {
+  flex: 1; 
+  max-width: 600px;
+
+  h1 {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    font-weight: 800;
+    margin-bottom: 20px;
     
-    .hero-container {
-      flex-direction: column-reverse; // Imagen arriba, texto abajo en móviles
-      text-align: center;
-      gap: 40px;
+    .gold-text {
+      color: var(--brand-gold);
     }
+  }
 
-    .hero-content {
-      .hero-title {
-        font-size: 2.5rem;
-      }
-      .hero-description {
-        margin: 0 auto 30px;
-      }
-      .hero-actions {
-        justify-content: center;
-        flex-direction: column;
-      }
+  p {
+    font-size: 1.1rem;
+    color: #ccc;
+    margin-bottom: 30px;
+    line-height: 1.6;
+  }
+}
+
+/* BOTONES */
+.btn-group {
+  display: flex;
+  gap: 15px;
+
+  button {
+    padding: 12px 30px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .btn-primary {
+    background: var(--brand-gold);
+    color: #000;
+    border: none;
+    &:hover { background: #d4af37; transform: translateY(-2px); }
+  }
+
+  .btn-secondary {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.3);
+    color: #fff;
+    &:hover { border-color: #fff; }
+  }
+}
+
+/* IMAGEN */
+.hero-image-container {
+  flex: 1; 
+  display: flex;
+  justify-content: center;
+  position: relative;
+
+  .floating-wallet {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    object-fit: contain;
+  
+    filter: drop-shadow(0 20px 30px rgba(0,0,0,0.5));
+  }
+}
+
+/* =========================================
+   RESPONSIVIDAD (AQUÍ ESTÁ LA CLAVE)
+   ========================================= */
+@media (max-width: 992px) { 
+  
+  .hero-section {
+    padding-top: 120px; 
+    text-align: center; 
+    
+    .container {
+      flex-direction: column-reverse;
+      gap: 30px;
     }
+  }
 
-    .hero-image-wrapper {
-      .hero-image {
-        max-width: 100%;
-      }
+  .hero-content {
+    h1 { font-size: 2.5rem; } 
+    p { font-size: 1rem; }
+    
+    .btn-group {
+      justify-content: center; 
+    }
+  }
+
+  .hero-image-container {
+    width: 100%;
+    
+    .floating-wallet {
+      max-width: 300px; 
     }
   }
 }

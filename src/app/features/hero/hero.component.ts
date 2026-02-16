@@ -1,6 +1,6 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { gsap } from 'gsap'; 
+import { gsap } from 'gsap';
 
 @Component({
   selector: 'app-hero',
@@ -10,14 +10,26 @@ import { gsap } from 'gsap';
   styleUrls: ['./hero.component.scss']
 })
 export class HeroComponent implements AfterViewInit {
+  // Referencia directa a la imagen para animarla
+  @ViewChild('walletImage') walletImage!: ElementRef;
 
   ngAfterViewInit() {
-    // Ahora 'gsap.timeline' debería reconocerse correctamente
-    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    // 1. Animación de Entrada (Texto y Botones)
+    gsap.from('.hero-content', {
+      opacity: 0,
+      y: 50,
+      duration: 1,
+      delay: 0.2
+    });
 
-    tl.from('.hero-title', { opacity: 0, x: -50, duration: 1 })
-      .from('.hero-description', { opacity: 0, x: -50, duration: 1 }, '-=0.6')
-      .from('.hero-actions', { opacity: 0, y: 30, duration: 0.8 }, '-=0.6')
-      .from('.hero-image-wrapper', { opacity: 0, scale: 0.9, duration: 1.2 }, '-=1');
+    // 2. Animación FLOTANTE (Loop Infinito)
+    // Usamos yoyo: true para que suba y baje suavemente
+    gsap.to(this.walletImage.nativeElement, {
+      y: -20,             // Sube 20px
+      duration: 2.5,      // Tarda 2.5 segundos
+      repeat: -1,         // Infinito
+      yoyo: true,         // Va y vuelve
+      ease: "sine.inOut"  // Movimiento muy suave (tipo respiración)
+    });
   }
 }
