@@ -1,0 +1,77 @@
+$black: #050505;
+$gold: #c7a17a;
+$white: #ffffff;
+$dark-grey: #121212;
+
+.cart-overlay {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.7); backdrop-filter: blur(3px);
+  z-index: 2000; opacity: 0; visibility: hidden; transition: 0.3s ease;
+  &.open { opacity: 1; visibility: visible; }
+}
+
+.cart-drawer {
+  position: fixed; top: 0; right: -100%; width: 400px; height: 100%;
+  background: $dark-grey; border-left: 1px solid #333;
+  z-index: 2001; transition: right 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  display: flex; flex-direction: column;
+  box-shadow: -10px 0 40px rgba(0,0,0,0.8);
+  font-family: 'Montserrat', sans-serif;
+
+  &.open { right: 0; }
+  
+  @media(max-width: 500px) { width: 85%; }
+}
+
+.drawer-header {
+  padding: 25px; border-bottom: 1px solid #222;
+  display: flex; justify-content: space-between; align-items: center;
+  background: $black;
+  h3 { color: $white; margin: 0; font-weight: 700; letter-spacing: -0.5px; }
+  .close-btn { background: none; border: none; color: $white; font-size: 1.5rem; cursor: pointer; transition: 0.2s; &:hover { color: $gold; } }
+}
+
+.drawer-body {
+  flex: 1; overflow-y: auto; padding: 20px;
+}
+
+.empty-state {
+  text-align: center; padding-top: 50px;
+  .icon { font-size: 3rem; margin-bottom: 10px; opacity: 0.5; }
+  p { color: #888; margin-bottom: 20px; }
+  .btn-continue { background: transparent; border: 1px solid $gold; color: $gold; padding: 10px 20px; cursor: pointer; border-radius: 4px; transition: 0.3s; &:hover { background: $gold; color: $black; } }
+}
+
+.cart-item {
+  display: flex; gap: 15px; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #222;
+  animation: fadeIn 0.3s ease;
+  
+  .img-wrapper {
+    width: 80px; height: 80px; border-radius: 8px; overflow: hidden; border: 1px solid #333;
+    img { width: 100%; height: 100%; object-fit: cover; }
+  }
+  
+  .item-details { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+  h4 { color: $white; margin: 0 0 5px; font-size: 0.95rem; font-weight: 600; }
+  .color { color: #888; font-size: 0.8rem; margin: 0; }
+  
+  .price-row { 
+    display: flex; justify-content: space-between; margin-top: 8px; 
+    .quantity { color: #666; font-size: 0.85rem; }
+    .price { color: $gold; font-weight: 700; }
+  }
+
+  .remove-btn { background: none; border: none; cursor: pointer; opacity: 0.5; font-size: 1.1rem; align-self: center; &:hover { opacity: 1; color: #ff5f5f; } }
+}
+
+.drawer-footer {
+  padding: 25px; background: $black; border-top: 1px solid #222;
+  .total-row { display: flex; justify-content: space-between; color: $white; font-size: 1.1rem; font-weight: 500; margin-bottom: 20px; .total-price { color: $gold; font-size: 1.4rem; font-weight: 800; } }
+  .btn-checkout {
+    width: 100%; padding: 16px; background: $gold; color: $black; border: none;
+    font-weight: 800; text-transform: uppercase; cursor: pointer; transition: 0.3s; letter-spacing: 1px;
+    &:hover { background: $white; transform: translateY(-2px); }
+  }
+}
+
+@keyframes fadeIn { from { opacity: 0; transform: translateX(10px); } to { opacity: 1; transform: translateX(0); } }

@@ -1,0 +1,69 @@
+<section class="collection-container" id="coleccion">
+  
+  <div class="header-collection fade-in-up">
+    <h2>Colección <span class="gold">DACB</span></h2>
+    <div class="divider"></div>
+    <p>Calidad Artesanal. Edición Limitada.</p>
+  </div>
+
+  <div class="products-grid">
+    
+    <div class="product-card featured fade-in">
+      <div class="image-container">
+        <img [src]="products[0].image" alt="Billetera Principal">
+        <div class="badge">Best Seller</div>
+      </div>
+      
+      <div class="info-container">
+        <small class="ref">REF. 001</small>
+        <h3>{{ products[0].name }}</h3>
+        <p class="desc">{{ products[0].description }}</p>
+        
+        <div class="color-selector">
+          <span>Color: <strong class="gold">{{ products[0].colorNames[products[0].selectedColor!] }}</strong></span>
+          <div class="colors">
+            <button *ngFor="let color of products[0].colors" 
+                    [style.background]="color" 
+                    [class.active]="products[0].selectedColor === color"
+                    (click)="selectColor(products[0], color)">
+            </button>
+          </div>
+        </div>
+
+        <div class="price-action">
+          <span class="price">${{ products[0].price | number:'1.2-2' }}</span>
+          <button class="btn-add-cart" (click)="addToCart(products[0])">Agregar al Carrito</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card fade-in delay-1" *ngFor="let product of products.slice(1)">
+      <div class="image-container small">
+        <img [src]="product.image" alt="{{ product.name }}">
+      </div>
+      
+      <div class="info-container">
+        <small class="ref">REF. 00{{ product.id }}</small>
+        <h3>{{ product.name }}</h3>
+        <p class="desc">{{ product.description }}</p>
+        
+        <div class="color-selector">
+          <span>Color: <strong>{{ product.colorNames[product.selectedColor!] }}</strong></span>
+          <div class="colors">
+            <button *ngFor="let color of product.colors" 
+                    [style.background]="color" 
+                    [class.active]="product.selectedColor === color"
+                    (click)="selectColor(product, color)">
+            </button>
+          </div>
+        </div>
+
+        <div class="price-action">
+          <span class="price">${{ product.price | number:'1.2-2' }}</span>
+          <button class="btn-add-cart outline" (click)="addToCart(product)">Agregar +</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>

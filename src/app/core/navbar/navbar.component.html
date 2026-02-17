@@ -6,7 +6,7 @@
     </a>
 
     <ul class="nav-links-desktop">
-      <li><a routerLink="/" fragment="coleccion">Colección</a></li>
+      <li><a routerLink="/coleccion" routerLinkActive="active">Colección</a></li>
       <li><a routerLink="/" fragment="contacto">Contacto</a></li>
     </ul>
 
@@ -47,7 +47,7 @@
             <line x1="3" y1="6" x2="21" y2="6"></line>
             <path d="M16 10a4 4 0 0 1-8 0"></path>
           </svg>
-          <span class="cart-badge">0</span>
+          <span class="cart-badge" *ngIf="cartCount > 0">{{ cartCount }}</span>
         </button>
       </div>
 
@@ -70,13 +70,15 @@
       </button>
 
       <ul class="mobile-links">
-        <li><a routerLink="/" (click)="closeMenu()">Colección</a></li>
+        <li><a routerLink="/coleccion" (click)="closeMenu()">Colección</a></li>
         <li><a routerLink="/" (click)="closeMenu()">Contacto</a></li>
+        
         <li class="cta-container">
           <button class="btn-nav full-width" (click)="comprarAhora()">Comprar Ahora</button>
         </li>
+        
         <li class="cart-link">
-          <a (click)="closeMenu()">Tu Carrito (0)</a>
+          <a (click)="handleCartClick()">Tu Carrito ({{ cartCount }})</a>
         </li>
       </ul>
     </div>

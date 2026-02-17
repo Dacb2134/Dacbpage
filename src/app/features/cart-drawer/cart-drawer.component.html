@@ -1,0 +1,44 @@
+<div class="cart-overlay" 
+     [class.open]="(cartService.isDrawerOpen$ | async)" 
+     (click)="cartService.closeCart()">
+</div>
+
+<div class="cart-drawer" [class.open]="(cartService.isDrawerOpen$ | async)">
+  
+  <div class="drawer-header">
+    <h3>Tu Carrito ({{ count }})</h3>
+    <button class="close-btn" (click)="cartService.closeCart()">✕</button>
+  </div>
+
+  <div class="drawer-body">
+    <div class="empty-state" *ngIf="(cartService.cart$ | async)?.length === 0">
+      <div class="icon">🛒</div>
+      <p>Tu carrito está vacío</p>
+      <button (click)="cartService.closeCart()" class="btn-continue">Ver Colección</button>
+    </div>
+
+    <div class="cart-item" *ngFor="let item of (cartService.cart$ | async)">
+      <div class="img-wrapper">
+        <img [src]="item.image" alt="Producto">
+      </div>
+      <div class="item-details">
+        <h4>{{ item.name }}</h4>
+        <p class="color">Color: {{ item.color }}</p>
+        <div class="price-row">
+          <span class="quantity">cant: {{ item.quantity }}</span>
+          <span class="price">${{ (item.price * item.quantity) | number:'1.2-2' }}</span>
+        </div>
+      </div>
+      <button class="remove-btn" (click)="cartService.removeFromCart(item.id, item.color)">🗑️</button>
+    </div>
+  </div>
+
+  <div class="drawer-footer" *ngIf="(cartService.cart$ | async)?.length! > 0">
+    <div class="total-row">
+      <span>Total Estimado:</span>
+      <span class="total-price">${{ total | number:'1.2-2' }}</span>
+    </div>
+    <button class="btn-checkout">Finalizar Compra</button>
+  </div>
+
+</div>
