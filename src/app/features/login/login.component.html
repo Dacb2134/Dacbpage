@@ -1,0 +1,31 @@
+<div class="auth-container">
+  <div class="auth-box">
+    <h2>{{ isRegistering ? 'Crear Cuenta' : 'Iniciar Sesión' }}</h2>
+    <p class="subtitle">Bienvenido al mundo DACB.</p>
+
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label>Correo Electrónico</label>
+        <input type="email" [(ngModel)]="email" name="email" required placeholder="tu@email.com">
+      </div>
+
+      <div class="form-group">
+        <label>Contraseña</label>
+        <input type="password" [(ngModel)]="password" name="password" required placeholder="******" minlength="6">
+      </div>
+
+      <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+      <button type="submit" class="btn-submit" [disabled]="!email || !password">
+        {{ isRegistering ? 'Registrarme' : 'Entrar' }}
+      </button>
+    </form>
+
+    <p class="switch-text">
+      {{ isRegistering ? '¿Ya tienes cuenta?' : '¿Nuevo en DACB?' }}
+      <button type="button" class="btn-link" (click)="toggleMode()">
+        {{ isRegistering ? 'Inicia Sesión' : 'Crea una cuenta' }}
+      </button>
+    </p>
+  </div>
+</div>

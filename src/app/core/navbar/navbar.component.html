@@ -1,18 +1,60 @@
-<nav class="navbar">
-  <div class="nav-container">
-    <div class="logo">
-      DACB<span>.</span>
+<nav class="navbar" [class.scrolled]="isScrolled">
+  <div class="container">
+    
+    <a routerLink="/" class="logo" (click)="closeMenu()">
+      DACB<span class="dot">.</span>
+    </a>
+
+    <ul class="nav-links-desktop">
+      <li><a routerLink="/" fragment="coleccion">Colección</a></li>
+      <li><a routerLink="/" fragment="contacto">Contacto</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      
+      <button class="btn-nav desktop-only">Comprar Ahora</button>
+      
+      <div class="cart-icon-wrapper">
+        <button class="icon-btn" aria-label="Ver carrito">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <span class="cart-badge">0</span>
+        </button>
+      </div>
+
+      <div class="hamburger" (click)="toggleMenu()">
+        <span></span>
+        <span></span>
+      </div>
+
     </div>
 
-    <button class="mobile-menu-btn" (click)="toggleMenu()">
-      <span [class.open]="isMenuOpen"></span>
-    </button>
+    <div class="mobile-menu-overlay" [class.active]="isMenuOpen">
+      
+      <button class="close-btn" (click)="closeMenu()">
+        <svg xmlns="http://www.w3.org/2000/svg" height="32" viewBox="0 96 960 960" width="32" fill="currentColor">
+          <path d="M256 848l-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224z"/>
+        </svg>
+      </button>
 
-    <ul class="nav-links" [class.active]="isMenuOpen">
-      <li><a href="#" (click)="closeMenu()">Colecciones</a></li>
-      <li><a href="#" (click)="closeMenu()">Materiales</a></li>
-      <li><a href="#" (click)="closeMenu()">Historia</a></li>
-      <li><a href="#" class="btn-cta" (click)="closeMenu()">Comprar Ahora</a></li>
-    </ul>
+      <ul class="mobile-links">
+        <li><a routerLink="/" (click)="closeMenu()">Colección</a></li>
+        <li><a routerLink="/" (click)="closeMenu()">Contacto</a></li>
+        
+        <li class="cta-container">
+          <button class="btn-nav full-width" (click)="closeMenu()">Comprar Ahora</button>
+        </li>
+        
+        <li class="cart-link">
+          <a (click)="closeMenu()">Tu Carrito (0)</a>
+        </li>
+      </ul>
+    </div>
+
   </div>
+  
+  <div class="bottom-gradient"></div>
 </nav>

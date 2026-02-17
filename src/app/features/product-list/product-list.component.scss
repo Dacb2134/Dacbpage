@@ -1,189 +1,82 @@
 .product-section {
-  padding: 100px 20px;
-  background-color: var(--brand-black); /* Fondo oscuro */
-  position: relative;
+  padding: 80px 20px 120px;
+  /* Fondo Gris Oscuro con una textura sutil (simulada con degradado) */
+  background-color: var(--brand-dark-grey);
+  background-image: radial-gradient(circle at top center, lighten(#1a1a1d, 5%) 0%, var(--brand-dark-grey) 70%);
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
+.container { max-width: 1440px; margin: 0 auto; }
 
-/* HEADER DE LA SECCIÓN */
+/* HEADER */
 .section-header {
   text-align: center;
-  margin-bottom: 60px;
-
+  margin-bottom: 70px;
   .title {
-    font-size: 3rem;
-    font-weight: 800;
-    margin-bottom: 10px;
-    color: #fff;
-    
-    .gold-text {
-      color: var(--brand-gold);
-    }
+    font-size: 2.5rem; margin-bottom: 10px; color: var(--brand-text-white);
+    .gold-text { color: var(--brand-gold); }
   }
-
-  .subtitle {
-    color: #888;
-    font-size: 1.1rem;
-  }
+  .subtitle { color: var(--brand-text-grey); font-size: 1.1rem; strong { color: var(--brand-text-white); } }
 }
 
-/* GRID LAYOUT (Responsivo) */
+/* GRID */
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 columnas en PC */
-  gap: 30px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 35px;
 }
 
-/* TARJETA DE PRODUCTO (Estilo Glow) */
+/* TARJETA (El estilo de la imagen) */
 .product-card {
-  background: #111; /* Un poco más claro que el fondo negro */
-  border: 1px solid #222;
-  border-radius: 12px;
+  background: var(--brand-card-grey); /* Gris medio para la tarjeta */
+  border-radius: 8px;
   overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  position: relative;
+  transition: all 0.4s ease;
+  border: 1px solid transparent; /* Borde invisible inicial */
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 
-  /* HOVER EFFECT: GLOW */
   &:hover {
-    transform: translateY(-10px);
-    border-color: var(--brand-gold);
-    box-shadow: 0 15px 30px rgba(184, 146, 78, 0.15); /* Brillo dorado suave */
-
-    .image-wrapper img {
-      transform: scale(1.08); /* Zoom suave a la imagen */
-    }
-
-    .overlay {
-      opacity: 1; /* Muestra el botón de vista rápida */
-    }
+    transform: translateY(-8px);
+    border-color: var(--brand-gold); /* Borde dorado al pasar el mouse */
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 0 15px rgba(199, 161, 122, 0.2);
+    .image-wrapper img { transform: scale(1.05); }
+    .btn-add { background: var(--brand-gold); color: var(--brand-black); }
   }
 }
 
-/* IMAGEN */
+/* IMAGEN DENTRO DE LA TARJETA */
 .image-wrapper {
-  position: relative;
-  height: 300px;
-  width: 100%;
-  background: #0a0a0a;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-
+  height: 260px;
+  padding: 30px;
+  background: darken(#252529, 3%); /* Fondo un pelín más oscuro para la imagen */
+  display: flex; align-items: center; justify-content: center; overflow: hidden;
   img {
-    width: 80%;
-    height: auto;
-    object-fit: contain;
+    width: 100%; height: auto; object-fit: contain;
     transition: transform 0.6s ease;
-    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
-  }
-
-  /* Overlay oscuro al pasar el mouse */
-  .overlay {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  .btn-quick-view {
-    background: #fff;
-    color: #000;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 20px;
-    font-weight: 600;
-    cursor: pointer;
-    transform: translateY(10px);
-    transition: transform 0.3s;
-    
-    &:hover {
-      background: var(--brand-gold);
-      color: #fff;
-    }
+    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));
   }
 }
 
-/* INFORMACIÓN */
+/* INFO */
 .info-wrapper {
   padding: 25px;
-
-  h3 {
-    font-size: 1.4rem;
-    font-weight: 700;
-    margin-bottom: 8px;
-    color: #fff;
-  }
-
-  .description {
-    color: #888;
-    font-size: 0.9rem;
-    margin-bottom: 20px;
-    height: 40px; /* Altura fija para alinear botones */
-  }
+  h3 { font-size: 1.3rem; margin-bottom: 10px; color: var(--brand-text-white); }
+  .description { color: var(--brand-text-grey); font-size: 0.95rem; margin-bottom: 25px; }
 }
 
 /* PRECIO Y BOTÓN */
 .price-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  .price {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--brand-gold);
-  }
-
+  display: flex; justify-content: space-between; align-items: center;
+  .price { font-size: 1.4rem; font-weight: 700; color: var(--brand-gold); }
   .btn-add {
+    padding: 10px 25px;
     background: transparent;
-    border: 1px solid #333;
-    color: #fff;
-    padding: 8px 15px;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-    transition: 0.3s;
-
-    &:hover {
-      background: #fff;
-      color: #000;
-      border-color: #fff;
-    }
+    border: 2px solid var(--brand-gold);
+    color: var(--brand-gold);
+    font-weight: 700; border-radius: 4px; cursor: pointer; transition: all 0.3s;
+    text-transform: uppercase; font-size: 0.9rem;
   }
 }
 
-/* =========================================
-   RESPONSIVIDAD
-   ========================================= */
-@media (max-width: 992px) {
-  .product-grid {
-    grid-template-columns: repeat(2, 1fr); /* 2 Columnas en Tablet */
-  }
-}
-
-@media (max-width: 600px) {
-  .section-header .title {
-    font-size: 2.2rem;
-  }
-  
-  .product-grid {
-    grid-template-columns: 1fr; /* 1 Columna en Celular */
-    gap: 40px; /* Más espacio entre productos */
-  }
-
-  .image-wrapper {
-    height: 250px; /* Imagen un poco más pequeña en móvil */
-  }
-}
+/* RESPONSIVIDAD */
+@media (max-width: 992px) { .product-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 650px) { .product-grid { grid-template-columns: 1fr; gap: 40px; } }

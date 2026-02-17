@@ -1,5 +1,7 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './features/home/home.component'; 
+import { HomeComponent } from './features/home/home.component';
+import { LoginComponent } from './features/login/login.component';
+
 
 export const routes: Routes = [
   { 
@@ -11,6 +13,13 @@ export const routes: Routes = [
     path: 'inicio', 
     component: HomeComponent 
   },
-  // (Opcional) Si quisieras una página solo para ver productos aparte:
-  // { path: 'catalogo', component: ProductListComponent } 
+  { 
+    path: 'login',  
+    component: LoginComponent 
+  },
+  
+  { 
+    path: '**', 
+    redirectTo: 'inicio' 
+  }
 ];

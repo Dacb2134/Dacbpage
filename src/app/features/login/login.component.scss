@@ -1,0 +1,73 @@
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--brand-black);
+  padding: 20px;
+}
+
+.auth-box {
+  width: 100%;
+  max-width: 400px;
+  background: var(--brand-dark-grey);
+  padding: 40px;
+  border-radius: 8px;
+  border: 1px solid rgba(199, 161, 122, 0.1); /* Borde dorado muy sutil */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  text-align: center;
+
+  h2 { color: var(--brand-text-white); margin-bottom: 10px; }
+  .subtitle { color: var(--brand-text-grey); margin-bottom: 30px; font-size: 0.9rem; }
+}
+
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+
+  label { display: block; color: var(--brand-text-grey); margin-bottom: 8px; font-size: 0.85rem; }
+  
+  input {
+    width: 100%;
+    padding: 12px;
+    background: #111;
+    border: 1px solid #333;
+    border-radius: 4px;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    
+    &:focus {
+      outline: none;
+      border-color: var(--brand-gold);
+    }
+  }
+}
+
+.btn-submit {
+  width: 100%;
+  padding: 14px;
+  background: var(--brand-gold);
+  color: var(--brand-black);
+  font-weight: 700;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: 0.3s;
+  font-family: 'Montserrat', sans-serif;
+
+  &:hover { background: white; }
+  &:disabled { opacity: 0.5; cursor: not-allowed; }
+}
+
+.error { color: #ff5f5f; font-size: 0.85rem; margin-bottom: 15px; }
+
+.switch-text {
+  margin-top: 25px;
+  color: var(--brand-text-grey);
+  font-size: 0.9rem;
+
+  .btn-link {
+    background: none; border: none; color: var(--brand-gold); font-weight: 600; cursor: pointer; text-decoration: underline;
+  }
+}

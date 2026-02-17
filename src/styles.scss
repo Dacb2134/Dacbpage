@@ -1,9 +1,12 @@
 
+
 :root {
-  --brand-black: #0a0a0a;     /* Un negro más profundo y rico */
-  --brand-gold: #b8924e;      /* Tu dorado original */
-  --brand-gray: #1f1f1f;      /* Para fondos secundarios */
-  --brand-white: #ededed;     /* Blanco suave para lectura */
+  --brand-black: #050505;       /* Negro profundo para Hero y Footer */
+  --brand-dark-grey: #1a1a1d;   /* Gris oscuro texturizado para Product List */
+  --brand-card-grey: #252529;   /* Gris medio para las tarjetas de producto */
+  --brand-gold: #c7a17a;        /* Dorado rico y elegante (tipo bronce/oro viejo) */
+  --brand-text-white: #ffffff;  /* Blanco puro para títulos principales */
+  --brand-text-grey: #a0a0a0;   /* Gris claro para subtítulos y descripciones */
 }
 
 
@@ -15,13 +18,19 @@
 
 html, body {
   width: 100%;
-  overflow-x: hidden; 
-  font-family: 'Segoe UI', Roboto, sans-serif;
-  background-color: var(--brand-black); 
-  color: var(--brand-white);
+  overflow-x: hidden;
+  font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  background-color: var(--brand-black);
+  color: var(--brand-text-white);
+  scroll-behavior: smooth;
 }
 
 
 h1, h2, h3 {
-  letter-spacing: -0.05em; 
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+button {
+  font-family: inherit;
 }

@@ -1,110 +1,109 @@
+/* Variables */
+$gold: #c7a17a;
+$black: #050505;
+$white: #ffffff;
+$nav-height: 80px;
+
 .navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 70px;
-  background-color: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid #e5e5e5;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
+  position: fixed; top: 0; left: 0; width: 100%; height: $nav-height; z-index: 1000;
+  transition: background 0.4s ease;
+  background: transparent;
+  font-family: 'Montserrat', sans-serif;
 
-  .nav-container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  &.scrolled {
+    background: rgba(5, 5, 5, 0.95);
+    backdrop-filter: blur(10px);
+    height: 70px;
+    .bottom-gradient { opacity: 0; }
   }
 
-  .logo {
-    font-size: 1.5rem;
-    font-weight: 900;
-    letter-spacing: -1px;
-    color: #000;
-    span { color: #b8924e; } // El toque dorado/cuero
+  .container {
+    max-width: 1600px; height: 100%; margin: 0 auto; padding: 0 20px;
+    display: flex; align-items: center; justify-content: space-between;
   }
-
-  .nav-links {
-    display: flex;
-    align-items: center;
-    list-style: none;
-    gap: 30px;
-
-    a {
-      text-decoration: none;
-      color: #333;
-      font-size: 0.9rem;
-      font-weight: 500;
-      transition: color 0.3s;
-      &:hover { color: #b8924e; }
-    }
-
-    .btn-cta {
-      background-color: #000;
-      color: #fff;
-      padding: 10px 20px;
-      border-radius: 5px;
-      &:hover { background-color: #333; color: #fff; }
-    }
-  }
-
-  .mobile-menu-btn { display: none; } // Oculto en PC
 }
 
-/* RESPONSIVO: Celulares */
-@media (max-width: 768px) {
-  .navbar {
-    .mobile-menu-btn {
-      display: block;
-      background: none;
-      border: none;
-      cursor: pointer;
-      width: 30px;
-      height: 20px;
-      position: relative;
-      z-index: 1001;
+/* LÍNEA DEGRADADA */
+.bottom-gradient {
+  position: absolute; bottom: 0; left: 0; width: 100%; height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%);
+  transition: opacity 0.3s;
+}
 
-      span {
-        display: block;
-        width: 100%;
-        height: 2px;
-        background: #000;
-        transition: 0.3s;
-        &::before, &::after {
-          content: '';
-          position: absolute;
-          width: 100%;
-          height: 2px;
-          background: #000;
-          transition: 0.3s;
-        }
-        &::before { top: 0; }
-        &::after { bottom: 0; }
-        &.open {
-          background: transparent;
-          &::before { transform: rotate(45deg); top: 9px; }
-          &::after { transform: rotate(-45deg); bottom: 9px; }
-        }
-      }
-    }
+/* LOGO */
+.logo {
+  font-size: 1.6rem; font-weight: 800; color: $white; text-decoration: none; letter-spacing: -1px; z-index: 1002;
+  .dot { color: $gold; }
+}
 
-    .nav-links {
-      position: fixed;
-      top: 0;
-      right: -100%; // Escondido a la derecha
-      width: 80%;
-      height: 100vh;
-      background: #fff;
-      flex-direction: column;
-      justify-content: center;
-      transition: 0.4s;
-      box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-      &.active { right: 0; } // Entra al hacer click
-    }
+/* LINKS ESCRITORIO */
+.nav-links-desktop {
+  display: flex; gap: 40px; list-style: none;
+  a {
+    color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;
+    &:hover { color: $gold; }
   }
+}
+
+/* GRUPO DE ACCIONES (Botón + Carrito + Hamburguesa) */
+.nav-actions {
+  display: flex; align-items: center; gap: 25px; z-index: 1002;
+}
+
+/* EL BOTÓN DE "COMPRAR AHORA" */
+.btn-nav {
+  background: $white; color: $black; padding: 10px 25px; border: none; border-radius: 2px;
+  font-weight: 700; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; cursor: pointer; transition: 0.3s;
+  
+  &:hover { background: $gold; color: $black; transform: translateY(-2px); }
+  
+  /* Estilo especial para cuando está dentro del menú móvil */
+  &.full-width { width: 100%; padding: 15px; margin-top: 10px; font-size: 1rem; }
+}
+
+/* ÍCONO CARRITO */
+.icon-btn {
+  background: none; border: none; cursor: pointer; color: $white; position: relative; display: flex; align-items: center;
+  svg { width: 24px; height: 24px; transition: 0.3s; }
+  &:hover svg { color: $gold; transform: scale(1.1); }
+  
+  .cart-badge {
+    position: absolute; top: -5px; right: -8px;
+    background: $gold; color: $black; font-size: 0.7rem; font-weight: 800;
+    width: 16px; height: 16px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+}
+
+.hamburger {
+  display: none; flex-direction: column; gap: 6px; cursor: pointer;
+  span { display: block; width: 24px; height: 2px; background: $white; border-radius: 2px; }
+}
+
+/* MENÚ MÓVIL */
+.mobile-menu-overlay {
+  position: fixed; top: 0; right: -100%; width: 100%; height: 100vh;
+  background: rgba(5, 5, 5, 0.98); backdrop-filter: blur(15px);
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  transition: right 0.4s ease; z-index: 1001;
+
+  &.active { right: 0; }
+
+  .mobile-links {
+    list-style: none; text-align: center; gap: 30px; display: flex; flex-direction: column; width: 80%;
+    a { font-size: 1.8rem; font-weight: 700; color: $white; text-decoration: none; text-transform: uppercase; }
+    .cart-link a { color: $gold; font-size: 1.2rem; margin-top: 20px; display: block; }
+  }
+
+  .close-btn {
+    position: absolute; top: 25px; right: 25px; background: none; border: none; color: $white; cursor: pointer;
+    &:hover { color: $gold; }
+  }
+}
+
+/* RESPONSIVIDAD */
+@media (max-width: 992px) {
+  .nav-links-desktop { display: none; } /* Ocultar links centrales */
+  .desktop-only { display: none; } /* Ocultar botón "Comprar Ahora" de la barra superior */
+  .hamburger { display: flex; } /* Mostrar hamburguesa */
 }
