@@ -30,21 +30,67 @@ $nav-height: 80px;
   transition: opacity 0.3s;
 }
 
+/* === LOGO CON SELLO === */
 .logo {
-  font-size: 1.6rem; font-weight: 800; color: $white; text-decoration: none; letter-spacing: -1px; z-index: 1002;
+  font-size: 1.6rem; 
+  font-weight: 800; 
+  color: $white; 
+  text-decoration: none; 
+  letter-spacing: -1px; 
+  z-index: 1002;
+  
+  /* Flexbox para alinear texto e imagen */
+  display: flex;
+  align-items: center;
+  
+  /* Gap en 0 para que no haya separación extra */
+  gap: 0px; 
+
   .dot { color: $gold; }
+
+  /* Estilos del Sello */
+  .logo-seal {
+    height: 70px;  /* Tamaño grande */
+    width: 70px;   /* Forzar cuadrado */
+    object-fit: cover; /* Recortar automáticamente */
+    object-position: center; /* Centrar el recorte */
+    border-radius: 50%; 
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    
+    /* TRUCO: Margen negativo para pegarlo al texto */
+    margin-left: -15px; 
+  }
+
+  /* Efecto Hover */
+  &:hover .logo-seal {
+    transform: rotate(20deg) scale(1.1);
+  }
 }
 
+/* LINKS ESCRITORIO */
 .nav-links-desktop {
   display: flex; gap: 40px; list-style: none;
+  position: absolute; left: 50%; transform: translateX(-50%);
+
   a {
-    color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;
-    &:hover { color: $gold; }
+    color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.85rem; 
+    font-weight: 600; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;
+    position: relative;
+
+    &:hover { color: $white; }
+
+    &.active-link {
+      color: $gold;
+      &::after {
+        content: ''; position: absolute; bottom: -5px; left: 0; width: 100%; height: 1px; background: $gold;
+      }
+    }
   }
 }
 
 .nav-actions {
   display: flex; align-items: center; gap: 25px; z-index: 1002;
+  margin-left: auto; 
 }
 
 .btn-nav {
@@ -72,7 +118,6 @@ $nav-height: 80px;
   &:hover { transform: scale(1.05); }
 }
 
-/* DROPDOWN USUARIO */
 .user-icon-wrapper { position: relative; }
 
 .user-dropdown {
@@ -97,23 +142,15 @@ $nav-height: 80px;
     display: flex; align-items: center; gap: 10px; width: 100%; text-align: left; padding: 10px;
     background: transparent; border: none; border-radius: 4px; color: #cccccc;
     font-family: 'Montserrat', sans-serif; font-size: 0.9rem; font-weight: 500; cursor: pointer; transition: all 0.2s;
-
     &:hover { background: rgba(255,255,255,0.05); color: $gold; transform: translateX(3px); }
     &.logout { color: #ff6b6b; margin-top: 5px; &:hover { background: rgba(255, 107, 107, 0.1); color: #ff8787; } }
   }
 }
 
-@keyframes fadeInDown {
-  from { opacity: 0; transform: translateY(-10px) scale(0.95); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
-}
+@keyframes fadeInDown { from { opacity: 0; transform: translateY(-10px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
 
-/* NUEVA HAMBURGUESA (VECTOR) */
-.hamburger-btn {
-  display: none; /* Oculto en PC */
-  z-index: 1002;
-  svg { width: 28px; height: 28px; }
-}
+/* HAMBURGUESA */
+.hamburger-btn { display: none; z-index: 1002; svg { width: 28px; height: 28px; } }
 
 /* MENÚ MÓVIL */
 .mobile-menu-overlay {
@@ -121,19 +158,17 @@ $nav-height: 80px;
   background: rgba(5, 5, 5, 0.98); backdrop-filter: blur(15px);
   display: flex; flex-direction: column; justify-content: center; align-items: center;
   transition: right 0.4s ease; z-index: 2005;
-
   &.active { right: 0; }
 
   .mobile-links {
     list-style: none; text-align: center; gap: 30px; display: flex; flex-direction: column; width: 80%;
     a { font-size: 1.8rem; font-weight: 700; color: $white; text-decoration: none; text-transform: uppercase; }
     .cart-link a { color: $gold; font-size: 1.2rem; margin-top: 20px; display: block; }
+    .active-mobile { color: $gold; }
   }
 
   .close-btn {
-    position: absolute; top: 24px; right: 20px; 
-    background: none; border: none; color: $white; cursor: pointer; z-index: 2010;
-    
+    position: absolute; top: 24px; right: 20px; background: none; border: none; color: $white; cursor: pointer; z-index: 2010;
     svg { width: 32px; height: 32px; transition: transform 0.3s; }
     &:hover svg { color: $gold; transform: rotate(90deg); }
   }
@@ -144,17 +179,11 @@ $nav-height: 80px;
   .nav-links-desktop { display: none; } 
   .desktop-only { display: none; } 
   .hamburger-btn { display: flex; } 
+  .nav-actions { margin-left: 0; }
 }
 
-/* AJUSTES PARA CELULARES PEQUEÑOS */
 @media (max-width: 480px) {
   .container { padding: 0 15px; } 
   .nav-actions { gap: 15px; } 
-  
-  .user-dropdown {
-    width: 200px; 
-    right: -65px; 
-    top: 50px;    
-    &::before { right: 78px; } 
-  }
+  .user-dropdown { width: 200px; right: -65px; top: 50px; &::before { right: 78px; } }
 }

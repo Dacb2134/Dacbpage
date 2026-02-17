@@ -1,18 +1,35 @@
 <nav class="navbar" [class.scrolled]="isScrolled">
   <div class="container">
     
-    <a routerLink="/" class="logo" (click)="closeMenu()">
-      DACB<span class="dot">.</span>
+    <a routerLink="/inicio" class="logo" (click)="closeMenu()">
+      <span>DACB<span class="dot">.</span></span>
+      
+      <img src="images/sello-dacb.png" alt="Sello DACB" class="logo-seal">
     </a>
 
     <ul class="nav-links-desktop">
-      <li><a routerLink="/coleccion" routerLinkActive="active">Colección</a></li>
-      <li><a routerLink="/" fragment="contacto">Contacto</a></li>
+      <li>
+        <a routerLink="/inicio" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
+          Inicio
+        </a>
+      </li>
+      <li>
+        <a routerLink="/coleccion" routerLinkActive="active-link">
+          Colección
+        </a>
+      </li>
+      <li>
+        <a routerLink="/inicio" fragment="contacto" (click)="scrollToContact()">
+          Contacto
+        </a>
+      </li>
     </ul>
 
     <div class="nav-actions">
       
-      <button class="btn-nav desktop-only" (click)="comprarAhora()">Comprar Ahora</button>
+      <button class="btn-nav desktop-only" routerLink="/coleccion">
+        Comprar Ahora
+      </button>
       
       <div class="user-icon-wrapper" *ngIf="user$ | async as user; else guestTemplate">
         <button class="icon-btn" (click)="toggleUserDropdown()">
@@ -58,7 +75,6 @@
           <line x1="3" y1="18" x2="21" y2="18"></line>
         </svg>
       </button>
-
     </div>
 
     <div class="mobile-menu-overlay" [class.active]="isMenuOpen">
@@ -70,11 +86,14 @@
       </button>
 
       <ul class="mobile-links">
-        <li><a routerLink="/coleccion" (click)="closeMenu()">Colección</a></li>
-        <li><a routerLink="/" (click)="closeMenu()">Contacto</a></li>
+        <li><a routerLink="/inicio" (click)="closeMenu()" routerLinkActive="active-mobile">Inicio</a></li>
+        <li><a routerLink="/coleccion" (click)="closeMenu()" routerLinkActive="active-mobile">Colección</a></li>
+        <li><a routerLink="/inicio" fragment="contacto" (click)="closeMenuAndScroll()">Contacto</a></li>
         
         <li class="cta-container">
-          <button class="btn-nav full-width" (click)="comprarAhora()">Comprar Ahora</button>
+          <button class="btn-nav full-width" routerLink="/coleccion" (click)="closeMenu()">
+            Comprar Ahora
+          </button>
         </li>
         
         <li class="cart-link">
@@ -82,7 +101,6 @@
         </li>
       </ul>
     </div>
-
   </div>
   
   <div class="bottom-gradient"></div>

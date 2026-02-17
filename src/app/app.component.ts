@@ -3,11 +3,12 @@ import { RouterOutlet } from '@angular/router';
 
 import { FooterComponent } from './core/footer/footer.component';
 import { NavbarComponent } from './core/navbar/navbar.component';
+import { CartDrawerComponent } from './features/cart-drawer/cart-drawer.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavbarComponent, FooterComponent],
+  imports: [RouterOutlet, NavbarComponent, FooterComponent,CartDrawerComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
