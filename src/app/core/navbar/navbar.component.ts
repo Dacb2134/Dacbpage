@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.services';
 
-
 @Component({
   selector: 'app-navbar',
   standalone: true,
@@ -18,27 +17,42 @@ export class NavbarComponent {
 
   isScrolled = false;
   isMenuOpen = false;
-  isUserDropdownOpen = false; // NUEVO: Controla el menú de usuario
+  isUserDropdownOpen = false;
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
     this.isScrolled = window.scrollY > 50;
   }
 
-  toggleMenu() { this.isMenuOpen = !this.isMenuOpen; }
-  closeMenu() { this.isMenuOpen = false; }
+  toggleMenu() { 
+    this.isMenuOpen = !this.isMenuOpen; 
+  }
 
-  // NUEVO: Alternar el menú de usuario
+  closeMenu() { 
+    this.isMenuOpen = false; 
+  }
+
   toggleUserDropdown() {
     this.isUserDropdownOpen = !this.isUserDropdownOpen;
   }
 
-  // NUEVO: Cerrar sesión
   async logout() {
     await this.authService.logout();
-    this.isUserDropdownOpen = false; // Cerrar el menú
-    this.router.navigate(['/']); // Ir al inicio
+    this.isUserDropdownOpen = false;
+    this.router.navigate(['/']);
   }
 
-  comprarAhora() { /* Tu lógica existente... */ }
+  comprarAhora() {
+    // Suscribirse una vez para ver el estado
+    this.authService.user$.subscribe(user => {
+      if (user) {
+        console.log("Usuario logueado -> Ir a checkout/WhatsApp");
+        // Aquí tu lógica futura
+      } else {
+        this.router.navigate(['/login']);
+      }
+    }).unsubscribe();
+    
+    this.closeMenu(); // Cerrar menú móvil si estaba abierto
+  }
 }

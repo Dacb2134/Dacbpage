@@ -15,7 +15,6 @@
       <button class="btn-nav desktop-only" (click)="comprarAhora()">Comprar Ahora</button>
       
       <div class="user-icon-wrapper" *ngIf="user$ | async as user; else guestTemplate">
-        
         <button class="icon-btn" (click)="toggleUserDropdown()">
           <img *ngIf="user.photoURL" [src]="user.photoURL" alt="Perfil" class="user-avatar">
           <span *ngIf="!user.photoURL">👤</span>
@@ -26,18 +25,10 @@
             <p class="name">{{ user.displayName || 'Usuario' }}</p>
             <p class="email">{{ user.email }}</p>
           </div>
-          
           <div class="dropdown-divider"></div>
-          
-          <button class="dropdown-item" routerLink="/perfil" (click)="isUserDropdownOpen = false">
-            Perfil
-          </button>
-          
-          <button class="dropdown-item logout" (click)="logout()">
-            Cerrar sesión
-          </button>
+          <button class="dropdown-item" routerLink="/perfil" (click)="isUserDropdownOpen = false">Perfil</button>
+          <button class="dropdown-item logout" (click)="logout()">Cerrar sesión</button>
         </div>
-
       </div>
 
       <ng-template #guestTemplate>
@@ -60,10 +51,13 @@
         </button>
       </div>
 
-      <div class="hamburger" (click)="toggleMenu()">
-        <span></span>
-        <span></span>
-      </div>
+      <button class="icon-btn hamburger-btn" (click)="toggleMenu()" *ngIf="!isMenuOpen">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
 
     </div>
 
@@ -78,11 +72,9 @@
       <ul class="mobile-links">
         <li><a routerLink="/" (click)="closeMenu()">Colección</a></li>
         <li><a routerLink="/" (click)="closeMenu()">Contacto</a></li>
-        
         <li class="cta-container">
           <button class="btn-nav full-width" (click)="comprarAhora()">Comprar Ahora</button>
         </li>
-        
         <li class="cart-link">
           <a (click)="closeMenu()">Tu Carrito (0)</a>
         </li>
