@@ -12,8 +12,43 @@
 
     <div class="nav-actions">
       
-      <button class="btn-nav desktop-only">Comprar Ahora</button>
+      <button class="btn-nav desktop-only" (click)="comprarAhora()">Comprar Ahora</button>
       
+      <div class="user-icon-wrapper" *ngIf="user$ | async as user; else guestTemplate">
+        
+        <button class="icon-btn" (click)="toggleUserDropdown()">
+          <img *ngIf="user.photoURL" [src]="user.photoURL" alt="Perfil" class="user-avatar">
+          <span *ngIf="!user.photoURL">👤</span>
+        </button>
+
+        <div class="user-dropdown" *ngIf="isUserDropdownOpen">
+          <div class="user-info">
+            <p class="name">{{ user.displayName || 'Usuario' }}</p>
+            <p class="email">{{ user.email }}</p>
+          </div>
+          
+          <div class="dropdown-divider"></div>
+          
+          <button class="dropdown-item" routerLink="/perfil" (click)="isUserDropdownOpen = false">
+            Perfil
+          </button>
+          
+          <button class="dropdown-item logout" (click)="logout()">
+            Cerrar sesión
+          </button>
+        </div>
+
+      </div>
+
+      <ng-template #guestTemplate>
+        <a routerLink="/login" class="icon-btn" title="Iniciar Sesión">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </a>
+      </ng-template>
+
       <div class="cart-icon-wrapper">
         <button class="icon-btn" aria-label="Ver carrito">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -45,7 +80,7 @@
         <li><a routerLink="/" (click)="closeMenu()">Contacto</a></li>
         
         <li class="cta-container">
-          <button class="btn-nav full-width" (click)="closeMenu()">Comprar Ahora</button>
+          <button class="btn-nav full-width" (click)="comprarAhora()">Comprar Ahora</button>
         </li>
         
         <li class="cart-link">

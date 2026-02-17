@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, user, User } from '@angular/fire/auth';
+import { Auth, GoogleAuthProvider, signInWithPopup, signOut, user, User } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -8,22 +8,18 @@ import { Observable } from 'rxjs';
 export class AuthService {
   private auth = inject(Auth);
 
-  // Variable reactiva: Nos dice si hay alguien logueado en tiempo real
+  // Observable: Muestra el usuario actual (o null si no hay nadie)
   user$: Observable<User | null> = user(this.auth);
 
   constructor() { }
 
-  // 1. Registrar usuario nuevo
-  register(email: string, pass: string) {
-    return createUserWithEmailAndPassword(this.auth, email, pass);
+  // 1. Iniciar sesión con Google (Popup)
+  loginWithGoogle() {
+    const provider = new GoogleAuthProvider();
+    return signInWithPopup(this.auth, provider);
   }
 
-  // 2. Iniciar sesión
-  login(email: string, pass: string) {
-    return signInWithEmailAndPassword(this.auth, email, pass);
-  }
-
-  // 3. Cerrar sesión
+  // 2. Cerrar sesión
   logout() {
     return signOut(this.auth);
   }
