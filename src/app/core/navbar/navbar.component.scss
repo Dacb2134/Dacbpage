@@ -130,9 +130,8 @@ $nav-height: 80px;
     .cart-link a { color: $gold; font-size: 1.2rem; margin-top: 20px; display: block; }
   }
 
-  /* BOTÓN CERRAR (X) - Ajustado para reemplazar a la hamburguesa */
   .close-btn {
-    position: absolute; top: 24px; right: 20px; /* Misma posición que los iconos del navbar */
+    position: absolute; top: 24px; right: 20px; 
     background: none; border: none; color: $white; cursor: pointer; z-index: 2010;
     
     svg { width: 32px; height: 32px; transition: transform 0.3s; }
@@ -154,8 +153,8 @@ $nav-height: 80px;
   
   .user-dropdown {
     width: 200px; 
-    right: -65px; /* Empuja el menú a la derecha para no tapar el logo */
+    right: -65px; 
     top: 50px;    
-    &::before { right: 78px; } /* Mantiene la flecha apuntando al usuario */
+    &::before { right: 78px; } 
   }
 }

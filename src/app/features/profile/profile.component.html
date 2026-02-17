@@ -1,0 +1,141 @@
+<div class="profile-container" *ngIf="user$ | async as user">
+  
+  <div class="profile-header">
+    <h1>Mi <span class="gold">Centro DACB</span></h1>
+    <p>Gestiona tus direcciones y revisa tu actividad.</p>
+  </div>
+
+  <div class="profile-main-grid">
+    
+    <div class="card identity-card">
+      <div class="avatar-wrapper">
+        <img [src]="user.photoURL || 'assets/default-avatar.png'" alt="Avatar">
+      </div>
+      <h2>{{ user.displayName }}</h2>
+      <p class="email">{{ user.email }}</p>
+      <div class="badge">Usuario Verificado</div>
+    </div>
+
+    <div class="card addresses-card">
+      
+      <div *ngIf="!isFormOpen" class="fade-in">
+        <div class="card-header">
+          <h3>📍 Mis Direcciones ({{savedAddresses.length}}/3)</h3>
+          <button class="btn-add-new" (click)="openForm()" *ngIf="savedAddresses.length < 3" title="Agregar nueva dirección">
+            + Nueva
+          </button>
+        </div>
+
+        <div class="empty-state" *ngIf="savedAddresses.length === 0">
+          <p>No tienes direcciones guardadas.</p>
+          <small>Agrega una para agilitar tus compras.</small>
+        </div>
+
+        <div class="address-list">
+          <div class="address-item fade-in-item" *ngFor="let addr of savedAddresses">
+            <div class="addr-content">
+              <h4>{{ addr.recipientName }}</h4>
+              <p class="addr-text">{{ addr.mainAddress }}</p>
+              <p class="addr-text small">{{ addr.city }} - Ecuador</p>
+              <p class="addr-phone">📞 {{ addr.phone }}</p>
+              <p class="addr-ref" *ngIf="addr.reference">"{{ addr.reference }}"</p>
+            </div>
+            <div class="addr-actions">
+              <button class="btn-icon edit" (click)="openForm(addr)" title="Editar">✏️</button>
+              <button class="btn-icon delete" (click)="deleteAddress(addr.id)" title="Eliminar">🗑️</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="limit-warning" *ngIf="savedAddresses.length >= 3">
+          <p>Has alcanzado el límite de 3 direcciones.</p>
+        </div>
+      </div>
+
+      <div *ngIf="isFormOpen" class="address-form-wrapper fade-in">
+        <h3>{{ isEditing ? 'Editar Dirección' : 'Nueva Dirección' }}</h3>
+        
+        <form [formGroup]="addressFormGroup" (ngSubmit)="saveAddress()">
+          
+          <div class="form-group">
+            <label>Nombre de quien recibe *</label>
+            <input type="text" formControlName="recipientName" placeholder="Ej: Diego Constante" 
+                   [class.invalid]="nameControl?.invalid && (nameControl?.dirty || nameControl?.touched)">
+            
+            <div class="error-message" *ngIf="nameControl?.invalid && (nameControl?.dirty || nameControl?.touched)">
+              <small *ngIf="nameControl?.errors?.['required']">El nombre es obligatorio.</small>
+              <small *ngIf="nameControl?.errors?.['minlength']">Debe tener al menos 3 letras.</small>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Celular (10 dígitos) *</label>
+            <input type="tel" formControlName="phone" placeholder="099xxxxxxx" maxlength="10"
+                   [class.invalid]="phoneControl?.invalid && (phoneControl?.dirty || phoneControl?.touched)">
+            <small class="hint" *ngIf="!phoneControl?.invalid">Solo números, sin espacios.</small>
+
+            <div class="error-message" *ngIf="phoneControl?.invalid && (phoneControl?.dirty || phoneControl?.touched)">
+              <small *ngIf="phoneControl?.errors?.['required']">El celular es obligatorio.</small>
+              <small *ngIf="phoneControl?.errors?.['pattern']">Debe tener exactamente 10 dígitos numéricos (Ej: 099...).</small>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Ciudad / Cantón *</label>
+            <input type="text" formControlName="city" placeholder="Ej: Guayaquil"
+                   [class.invalid]="cityControl?.invalid && (cityControl?.dirty || cityControl?.touched)">
+            <div class="error-message" *ngIf="cityControl?.invalid && (cityControl?.dirty || cityControl?.touched)">
+              <small>La ciudad es obligatoria.</small>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Dirección Exacta *</label>
+            <input type="text" formControlName="mainAddress" placeholder="Calle principal, número, manzana..."
+                   [class.invalid]="addressControl?.invalid && (addressControl?.dirty || addressControl?.touched)">
+            <div class="error-message" *ngIf="addressControl?.invalid && (addressControl?.dirty || addressControl?.touched)">
+              <small>La dirección es obligatoria.</small>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Referencia (Opcional pero recomendado)</label>
+            <textarea formControlName="reference" rows="2" placeholder="Ej: Frente al parque, casa color naranja..."></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn-cancel" (click)="closeForm()">Cancelar</button>
+            <button type="submit" class="btn-save" [disabled]="addressFormGroup.invalid">Guardar Dirección</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="profile-extra-sections fade-in-up">
+    
+    <div class="card orders-card">
+      <div class="card-header">
+        <h3>🛍️ Mis Pedidos Recientes</h3>
+        <a routerLink="/" class="link-gold">Ver tienda</a>
+      </div>
+      <div class="empty-state-horizontal">
+        <span class="icon">📦</span>
+        <p>Aún no has realizado pedidos.</p>
+      </div>
+    </div>
+
+    <div class="card wishlist-card">
+       <div class="card-header">
+        <h3>❤️ Mi Lista de Deseos</h3>
+      </div>
+       <div class="empty-state-horizontal">
+        <span class="icon">✨</span>
+        <p>Guarda aquí lo que más te guste.</p>
+      </div>
+    </div>
+
+  </div>
+
+</div>

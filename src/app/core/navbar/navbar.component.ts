@@ -43,16 +43,29 @@ export class NavbarComponent {
   }
 
   comprarAhora() {
-    // Suscribirse una vez para ver el estado
+    this.checkAuthAndRedirect(() => {
+      console.log("Usuario logueado -> Ir a checkout/WhatsApp");
+      // Aquí iría tu lógica de compra
+    });
+  }
+
+  // NUEVA FUNCIÓN: Manejar clic en el carrito
+  handleCartClick() {
+    this.checkAuthAndRedirect(() => {
+      console.log("Abriendo carrito...");
+      // Aquí iría la lógica para mostrar el carrito lateral
+    });
+  }
+
+  // Helper para no repetir código
+  private checkAuthAndRedirect(callback: () => void) {
     this.authService.user$.subscribe(user => {
       if (user) {
-        console.log("Usuario logueado -> Ir a checkout/WhatsApp");
-        // Aquí tu lógica futura
+        callback();
       } else {
         this.router.navigate(['/login']);
       }
     }).unsubscribe();
-    
-    this.closeMenu(); // Cerrar menú móvil si estaba abierto
+    this.closeMenu();
   }
 }
